@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.32">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-13394||-9223372036854775808|c|G
-13394||10|c|G
-13394||10|C|G
-13394||10|T|G</Grants>
-      <IntrospectionStateNumber>488</IntrospectionStateNumber>
+      <IntrospectionStateNumber>496</IntrospectionStateNumber>
       <ServerVersion>13.3</ServerVersion>
       <StartupTime>1745084573</StartupTime>
       <TimeZones>true ACDT
@@ -1431,8 +1423,11 @@ true posixrules
 13111||10|C|G
 13111||-9223372036854775808|U|G
 13111||10|U|G</Grants>
-      <IntrospectionStateNumber>489</IntrospectionStateNumber>
+      <IntrospectionStateNumber>497</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
+      <Relations>sequence|table|16385|16387|1
+sequence|table|16396|16398|1
+</Relations>
       <OwnerName>banking</OwnerName>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -4758,10 +4753,219 @@ true posixrules
     <schema id="253" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>489</IntrospectionStateNumber>
+      <IntrospectionStateNumber>497</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>287</StateNumber>
       <OwnerName>banking</OwnerName>
     </schema>
+    <sequence id="254" parent="253" name="account_account_id_seq">
+      <DataType>integer|0s</DataType>
+      <ObjectId>16396</ObjectId>
+      <StateNumber>493</StateNumber>
+      <OwnerName>banking</OwnerName>
+    </sequence>
+    <sequence id="255" parent="253" name="client_id_seq">
+      <DataType>integer|0s</DataType>
+      <ObjectId>16385</ObjectId>
+      <StateNumber>490</StateNumber>
+      <OwnerName>banking</OwnerName>
+    </sequence>
+    <table id="256" parent="253" name="account">
+      <ObjectId>16398</ObjectId>
+      <StateNumber>493</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>banking</OwnerName>
+    </table>
+    <table id="257" parent="253" name="client">
+      <ObjectId>16387</ObjectId>
+      <StateNumber>493</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>banking</OwnerName>
+    </table>
+    <column id="258" parent="256" name="account_id">
+      <DataType>integer|0s</DataType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>493</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="259" parent="256" name="client_id">
+      <DataType>integer|0s</DataType>
+      <Position>2</Position>
+      <StateNumber>493</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="260" parent="256" name="account_number">
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>493</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="261" parent="256" name="amount">
+      <DataType>integer|0s</DataType>
+      <Position>4</Position>
+      <StateNumber>493</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="262" parent="256" name="account_client_id_fkey">
+      <ColNames>client_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16405</ObjectId>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <RefKeyName>client_pkey</RefKeyName>
+      <StateNumber>493</StateNumber>
+      <RefTableId>16387</RefTableId>
+      <RefTableName>client</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="263" parent="256" name="account_pkey">
+      <ClassIds>1978</ClassIds>
+      <ColNames>account_id</ColNames>
+      <CollationIds>0</CollationIds>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16401</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>493</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="264" parent="256" name="account_account_number_key">
+      <ClassIds>1978</ClassIds>
+      <ColNames>account_number</ColNames>
+      <CollationIds>0</CollationIds>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16403</ObjectId>
+      <StateNumber>493</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="265" parent="256" name="account_pkey">
+      <ColNames>account_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16402</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>493</StateNumber>
+      <UnderlyingIndexId>16401</UnderlyingIndexId>
+    </key>
+    <key id="266" parent="256" name="account_account_number_key">
+      <ColNames>account_number</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16404</ObjectId>
+      <StateNumber>493</StateNumber>
+      <UnderlyingIndexId>16403</UnderlyingIndexId>
+    </key>
+    <column id="267" parent="257" name="id">
+      <DataType>integer|0s</DataType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="268" parent="257" name="lastname">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="269" parent="257" name="name">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="270" parent="257" name="patronymic">
+      <DataType>varchar(50)|0s</DataType>
+      <Position>4</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="271" parent="257" name="phone">
+      <DataType>varchar(13)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="272" parent="257" name="birthday">
+      <DataType>timestamp|0s</DataType>
+      <Position>6</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="273" parent="257" name="email">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="274" parent="257" name="password">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+      <StateNumber>490</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="275" parent="257" name="client_pkey">
+      <ClassIds>1978</ClassIds>
+      <ColNames>id</ColNames>
+      <CollationIds>0</CollationIds>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16390</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>490</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="276" parent="257" name="client_phone_key">
+      <ClassIds>3126</ClassIds>
+      <ColNames>phone</ColNames>
+      <CollationIds>100</CollationIds>
+      <CollationNames>default</CollationNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16392</ObjectId>
+      <StateNumber>490</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="277" parent="257" name="client_email_key">
+      <ClassIds>3126</ClassIds>
+      <ColNames>email</ColNames>
+      <CollationIds>100</CollationIds>
+      <CollationNames>default</CollationNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16394</ObjectId>
+      <StateNumber>490</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="278" parent="257" name="client_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16391</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>490</StateNumber>
+      <UnderlyingIndexId>16390</UnderlyingIndexId>
+    </key>
+    <key id="279" parent="257" name="client_phone_key">
+      <ColNames>phone</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16393</ObjectId>
+      <StateNumber>490</StateNumber>
+      <UnderlyingIndexId>16392</UnderlyingIndexId>
+    </key>
+    <key id="280" parent="257" name="client_email_key">
+      <ColNames>email</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16395</ObjectId>
+      <StateNumber>490</StateNumber>
+      <UnderlyingIndexId>16394</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>
