@@ -1,6 +1,12 @@
 .btnOnMainPage{
-    -fx-background-color: blue;
+    -fx-background-color: #130e7b;
+-fx-border-color: black;
+-fx-border-width: 5;
+
+}
+.btnCreditCardPagination{
+    -fx-background-color: 0;
     -fx-border-color: black;
     -fx-border-width: 5;
-
+    -fx-border-radius: 5px;
 }
