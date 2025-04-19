@@ -44,11 +44,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.28.Final</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>10.4.1</version>
-        </dependency>-->
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>10.20.1</version>
+        </dependency>
     </dependencies>
 
     <build>
