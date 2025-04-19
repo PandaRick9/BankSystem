@@ -1,6 +1,7 @@
 package by.teamwork.banksystem.models;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client")
-@RequiredArgsConstructor
+@Table(name = "account")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Account {
     @Id

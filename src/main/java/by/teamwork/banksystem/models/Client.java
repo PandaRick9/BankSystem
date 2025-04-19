@@ -1,6 +1,7 @@
 package by.teamwork.banksystem.models;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "client")
-@RequiredArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Client {
     @Id
@@ -42,9 +44,9 @@ public class Client {
     private String patronymic;
     @Column(name = "phone")
     private String phone;
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "birthday")
     private LocalDateTime birthday;
     @OneToMany(mappedBy = "client")
     private List<Account> accounts;
+
 }
