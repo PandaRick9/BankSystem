@@ -10,3 +10,21 @@
     -fx-border-width: 5;
     -fx-border-radius: 5px;
 }
+
+.defaultText{
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-style: bold;
+    -fx-font-size: 20;
+}
+
+.btnBlueWhiteBorder{
+    -fx-background-color: #130e7b;
+    -fx-border-color: white;
+    -fx-border-width: 5;
+}
+.errorBtn{
+    -fx-text-fill: red;
+    -fx-font-family: Arial;
+    -fx-font-size: 14;
+}
