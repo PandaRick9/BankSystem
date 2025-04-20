@@ -19,16 +19,11 @@
          </font>
       </Label>
       <TextField fx:id="lastNameField" layoutX="20.0" layoutY="124.0" prefHeight="40.0" prefWidth="440.0" promptText="Фамилия (Иванов)" />
-      <Button fx:id="sendButton" layoutX="173.0" layoutY="597.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="141.0" styleClass="btnOnMainPage" stylesheets="@../../../style/style.css" text="Отправить" textFill="WHITE">
+      <Button fx:id="sendButton" layoutX="170.0" layoutY="585.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="141.0" styleClass="btnOnMainPage" stylesheets="@../../../style/style.css" text="Отправить" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font></Button>
       <CheckBox fx:id="license" layoutX="21.0" layoutY="545.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="379.0" text="Я принимаю условия пользовательского соглашения" />
-      <Text fx:id="nameWrong" layoutX="33.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="emailWrong" layoutX="33.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="birthdayWrong" layoutX="29.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="phoneWrong" layoutX="29.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="licenseWrong" layoutX="33.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text layoutX="71.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="Бета Банк">
          <font>
             <Font name="Arial Black" size="30.0" />
@@ -80,5 +75,10 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
+      <Button fx:id="backButton" layoutX="188.0" layoutY="661.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="105.0" styleClass="btnOnMainPage" stylesheets="@../../../style/style.css" text="Назад" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

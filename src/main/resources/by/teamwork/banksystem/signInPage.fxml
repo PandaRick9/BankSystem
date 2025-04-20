@@ -10,12 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="480.0" style="-fx-background-color: #9396a3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.teamwork.banksystem.SignInPage">
    <children>
-      <Text layoutX="64.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="Бета Банк">
+      <Text layoutX="64.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="Бета Банк">
          <font>
-            <Font name="Arial Black" size="30.0" />
+            <Font name="Arial Black" size="36.0" />
          </font>
       </Text>
       <ImageView fitHeight="54.0" fitWidth="38.0" layoutX="14.0" layoutY="14.0">
@@ -23,29 +22,29 @@
             <Image url="@../../../pictures/Logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="53.0" layoutY="152.0" text="Email" textFill="WHITE">
+      <Label layoutX="44.0" layoutY="225.0" text="Email" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="241.0" text="Пароль" textFill="WHITE">
+      <Label layoutX="33.0" layoutY="314.0" text="Пароль" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="emailField" layoutX="136.0" layoutY="147.0" prefHeight="40.0" prefWidth="320.0" />
-      <PasswordField fx:id="passwordField" layoutX="136.0" layoutY="236.0" prefHeight="40.0" prefWidth="320.0" />
-      <Button fx:id="signInButton" layoutX="142.0" layoutY="387.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="196.0" styleClass="btnOnMainPage" stylesheets="@../../../style/style.css" text="Войти" textFill="WHITE">
+      <TextField fx:id="emailField" layoutX="127.0" layoutY="220.0" prefHeight="40.0" prefWidth="320.0" />
+      <PasswordField fx:id="passwordField" layoutX="127.0" layoutY="309.0" prefHeight="40.0" prefWidth="320.0" />
+      <Button fx:id="signInButton" layoutX="142.0" layoutY="496.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="196.0" styleClass="btnOnMainPage" stylesheets="@../../../style/style.css" text="Войти" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="20.0" />
          </font>
       </Button>
-      <Text fx:id="emailError" fill="RED" layoutX="142.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="emailError" fill="RED" layoutX="133.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="passwordError" fill="RED" layoutX="139.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="passwordError" fill="RED" layoutX="130.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
