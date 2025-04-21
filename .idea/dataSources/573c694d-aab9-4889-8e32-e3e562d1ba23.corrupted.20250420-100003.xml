@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="bankDB@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.32">
     <root id="1">
       <DateStyle>mdy</DateStyle>
       <Grants>1||-9223372036854775808|c|G
@@ -1433,6 +1433,9 @@ true posixrules
 13111||10|U|G</Grants>
       <IntrospectionStateNumber>492</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
+      <Relations>sequence|table|16395|16397|1
+sequence|table|16406|16408|1
+</Relations>
       <OwnerName>banking</OwnerName>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -4764,19 +4767,15 @@ true posixrules
       <OwnerName>banking</OwnerName>
     </schema>
     <sequence id="254" parent="253" name="account_account_id_seq">
+      <DataType>integer|0s</DataType>
       <ObjectId>16406</ObjectId>
-      <SequenceIdentity>1</SequenceIdentity>
-      <StartValue>1</StartValue>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <OwnerName>banking</OwnerName>
     </sequence>
     <sequence id="255" parent="253" name="client_id_seq">
+      <DataType>integer|0s</DataType>
       <ObjectId>16395</ObjectId>
-      <SequenceIdentity>1</SequenceIdentity>
-      <StartValue>1</StartValue>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <OwnerName>banking</OwnerName>
     </sequence>
     <table id="256" parent="253" name="account">
@@ -4798,65 +4797,67 @@ true posixrules
       <OwnerName>banking</OwnerName>
     </table>
     <column id="259" parent="256" name="account_id">
+      <DataType>integer|0s</DataType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
-      <SequenceId>16406</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="260" parent="256" name="client_id">
+      <DataType>integer|0s</DataType>
       <Position>2</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="261" parent="256" name="account_number">
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="262" parent="256" name="amount">
+      <DataType>integer|0s</DataType>
       <Position>4</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <foreign-key id="263" parent="256" name="account_client_id_fkey">
       <ColNames>client_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16415</ObjectId>
-      <StateNumber>488</StateNumber>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
       <RefKeyName>client_pkey</RefKeyName>
+      <StateNumber>488</StateNumber>
       <RefTableId>16397</RefTableId>
       <RefTableName>client</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
     <index id="264" parent="256" name="account_pkey">
+      <ClassIds>1978</ClassIds>
       <ColNames>account_id</ColNames>
+      <CollationIds>0</CollationIds>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16411</ObjectId>
       <Primary>1</Primary>
       <StateNumber>488</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>1978</ClassIds>
-      <CollationIds>0</CollationIds>
     </index>
     <index id="265" parent="256" name="account_account_number_key">
+      <ClassIds>1978</ClassIds>
       <ColNames>account_number</ColNames>
+      <CollationIds>0</CollationIds>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16413</ObjectId>
       <StateNumber>488</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>1978</ClassIds>
-      <CollationIds>0</CollationIds>
     </index>
     <key id="266" parent="256" name="account_pkey">
+      <ColNames>account_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16412</ObjectId>
       <Primary>1</Primary>
@@ -4864,101 +4865,102 @@ true posixrules
       <UnderlyingIndexId>16411</UnderlyingIndexId>
     </key>
     <key id="267" parent="256" name="account_account_number_key">
+      <ColNames>account_number</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16414</ObjectId>
       <StateNumber>488</StateNumber>
       <UnderlyingIndexId>16413</UnderlyingIndexId>
     </key>
     <column id="268" parent="257" name="id">
+      <DataType>integer|0s</DataType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>integer|0s</StoredType>
-      <SequenceId>16395</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="269" parent="257" name="lastname">
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="270" parent="257" name="name">
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="271" parent="257" name="patronymic">
+      <DataType>varchar(50)|0s</DataType>
       <Position>4</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="272" parent="257" name="phone">
+      <DataType>varchar(13)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>varchar(13)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="273" parent="257" name="birthday">
+      <DataType>timestamp|0s</DataType>
       <Position>6</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <column id="274" parent="257" name="email">
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="275" parent="257" name="password">
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StateNumber>488</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="276" parent="257" name="client_pkey">
+      <ClassIds>1978</ClassIds>
       <ColNames>id</ColNames>
+      <CollationIds>0</CollationIds>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16400</ObjectId>
       <Primary>1</Primary>
       <StateNumber>488</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>1978</ClassIds>
-      <CollationIds>0</CollationIds>
     </index>
     <index id="277" parent="257" name="client_phone_key">
+      <ClassIds>3126</ClassIds>
       <ColNames>phone</ColNames>
+      <CollationIds>100</CollationIds>
+      <CollationNames>default</CollationNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16402</ObjectId>
       <StateNumber>488</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>3126</ClassIds>
-      <CollationNames>default</CollationNames>
-      <CollationIds>100</CollationIds>
     </index>
     <index id="278" parent="257" name="client_email_key">
+      <ClassIds>3126</ClassIds>
       <ColNames>email</ColNames>
+      <CollationIds>100</CollationIds>
+      <CollationNames>default</CollationNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16404</ObjectId>
       <StateNumber>488</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>3126</ClassIds>
-      <CollationNames>default</CollationNames>
-      <CollationIds>100</CollationIds>
     </index>
     <key id="279" parent="257" name="client_pkey">
+      <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16401</ObjectId>
       <Primary>1</Primary>
@@ -4966,105 +4968,108 @@ true posixrules
       <UnderlyingIndexId>16400</UnderlyingIndexId>
     </key>
     <key id="280" parent="257" name="client_phone_key">
+      <ColNames>phone</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16403</ObjectId>
       <StateNumber>488</StateNumber>
       <UnderlyingIndexId>16402</UnderlyingIndexId>
     </key>
     <key id="281" parent="257" name="client_email_key">
+      <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16405</ObjectId>
       <StateNumber>488</StateNumber>
       <UnderlyingIndexId>16404</UnderlyingIndexId>
     </key>
     <column id="282" parent="258" name="installed_rank">
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="283" parent="258" name="version">
+      <DataType>varchar(50)|0s</DataType>
       <Position>2</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="284" parent="258" name="description">
+      <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>varchar(200)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="285" parent="258" name="type">
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>varchar(20)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="286" parent="258" name="script">
+      <DataType>varchar(1000)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>varchar(1000)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="287" parent="258" name="checksum">
+      <DataType>integer|0s</DataType>
       <Position>6</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="288" parent="258" name="installed_by">
+      <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="289" parent="258" name="installed_on">
+      <DataType>timestamp|0s</DataType>
       <DefaultExpression>now()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <column id="290" parent="258" name="execution_time">
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="291" parent="258" name="success">
+      <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StateNumber>487</StateNumber>
-      <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
     <index id="292" parent="258" name="flyway_schema_history_pk">
+      <ClassIds>1978</ClassIds>
       <ColNames>installed_rank</ColNames>
+      <CollationIds>0</CollationIds>
       <ObjectId>16392</ObjectId>
       <Primary>1</Primary>
       <StateNumber>487</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>1978</ClassIds>
-      <CollationIds>0</CollationIds>
     </index>
     <index id="293" parent="258" name="flyway_schema_history_s_idx">
+      <ClassIds>10003</ClassIds>
       <ColNames>success</ColNames>
+      <CollationIds>0</CollationIds>
       <ObjectId>16394</ObjectId>
       <StateNumber>487</StateNumber>
       <AccessMethodId>403</AccessMethodId>
-      <ClassIds>10003</ClassIds>
-      <CollationIds>0</CollationIds>
     </index>
     <key id="294" parent="258" name="flyway_schema_history_pk">
+      <ColNames>installed_rank</ColNames>
       <ObjectId>16393</ObjectId>
       <Primary>1</Primary>
       <StateNumber>487</StateNumber>
