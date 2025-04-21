@@ -24,7 +24,7 @@
     -fx-border-width: 5;
 }
 .errorBtn{
-    -fx-text-fill: red;
+    -fx-text-fill: #940d0d;
     -fx-font-family: Arial;
     -fx-font-size: 14;
 }
