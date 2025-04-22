@@ -74,28 +74,29 @@ public class SignInPageController {
         });
     }
 
-    private boolean validateClient(){
+    private void validateClient(){
         Client client = getClientFromDB();
         if(client ==  null){
             emailError.setText("Неправильный логин");
-        }
-        if(passwordField.getText().equals("")){
-            passwordError.setText("Введите пароль");
-        }else if(!passwordField.getText().equals(client.getPassword())){
-            passwordError.setText("Неправильный пароль");
-        }else{
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/mainPage.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) signInButton.getScene().getWindow();
-                Scene nextScene = new Scene(root);
-                stage.setScene(nextScene);
-            } catch (IOException e) {
-                e.printStackTrace();
+        }else {
+            if (passwordField.getText().equals("")) {
+                passwordError.setText("Введите пароль");
+            } else if (!passwordField.getText().equals(client.getPassword())) {
+                passwordError.setText("Неправильный пароль");
+            } else {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/mainPage.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) signInButton.getScene().getWindow();
+                    Scene nextScene = new Scene(root);
+                    MainPageController mainPageController = loader.getController();
+                    mainPageController.initData(client);
+                    stage.setScene(nextScene);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
-        return true;
     }
     private Client getClientFromDB(){
         Configuration configuration = new Configuration().addAnnotatedClass(Client.class)

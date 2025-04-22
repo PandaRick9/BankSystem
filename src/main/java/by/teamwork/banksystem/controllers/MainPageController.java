@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+
 import by.teamwork.banksystem.models.Account;
 import by.teamwork.banksystem.models.Client;
 import javafx.fxml.FXML;
@@ -78,6 +79,8 @@ public class MainPageController {
     @FXML
     private Button transferToAccountButton;
 
+    private Client client;
+
     @FXML
     void initialize() {
         assert accountNumberText != null : "fx:id=\"accountNumberText\" was not injected: check your FXML file 'mainPage.fxml'.";
@@ -138,6 +141,7 @@ public class MainPageController {
         });
     }
 
+
     private Integer getAccountNumber() {
             Random random = new Random();
             int ownerAccount = 1; //для физлица 1
@@ -148,6 +152,19 @@ public class MainPageController {
             int randomNumber = random.nextInt(1000);
             String result = ownerAccount + goalAccount + accountCurrency + controlNumber + String.format("%03d\n", bankDepartament) + String.format("%03d\n", randomNumber);
             return Integer.parseInt(result);
+
+
+    }
+
+    public void initData(Client client){
+        this.client = client;
+        fullNameText.setText(client.getLastname() + " " + client.getName() + " " + client.getPatronymic());
+        emailText.setText(client.getEmail());
+    }
+
+    private void setTextForElement(){
+
+
     }
 
 }
