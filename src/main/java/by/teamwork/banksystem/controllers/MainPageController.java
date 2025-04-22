@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -118,53 +120,50 @@ public class MainPageController {
             Integer accountNumberGen;
             try {
                 session.beginTransaction();
-                while (true){
-                accountNumberGen = getAccountNumber();
+                while (true) {
+                    accountNumberGen = getAccountNumber();
                     Query<Account> query = session.createQuery("Select c FROM Account c WHERE c.accountNumber = :accountNumber", Account.class);
                     query.setParameter("accountNumber", accountNumberGen);
-                    if(query.uniqueResult() == null){
+                    if (query.uniqueResult() == null) {
                         break;
                     }
                 }
                 Account account = Account.builder()
                         .amount(0)
                         .accountNumber(accountNumberGen)
-                        //.client_id(client.getId())
+                        .client(client)
                         .build();
                 session.save(account);
-
-
                 session.getTransaction().commit();
             } finally {
                 sessionFactory.close();
             }
+
         });
     }
 
 
     private Integer getAccountNumber() {
-            Random random = new Random();
-            int ownerAccount = 1; //для физлица 1
-            int goalAccount = random.nextInt(10);
-            int accountCurrency = 4;//валюта счета  4 = $
-            int controlNumber = random.nextInt(10); //контрольная цифра
-            int bankDepartament = random.nextInt(1000);
-            int randomNumber = random.nextInt(1000);
-            String result = ownerAccount + goalAccount + accountCurrency + controlNumber + String.format("%03d\n", bankDepartament) + String.format("%03d\n", randomNumber);
-            return Integer.parseInt(result);
+        Random random = new Random();
+        int ownerAccount = 1; //для физлица 1
+        int goalAccount = random.nextInt(10);
+        int accountCurrency = 4;//валюта счета  4 = $
+        int controlNumber = random.nextInt(10); //контрольная цифра
+        int bankDepartment = random.nextInt(1000);
+        int randomNumber = random.nextInt(1000);
+        String result = String.valueOf(ownerAccount) + String.valueOf(goalAccount) + String.valueOf(accountCurrency) + String.valueOf(controlNumber) + String.format("%03d", bankDepartment) + String.format("%03d", randomNumber);
+        return Integer.parseInt(result);
 
 
     }
 
-    public void initData(Client client){
+    public void initData(Client client) {
         this.client = client;
         fullNameText.setText(client.getLastname() + " " + client.getName() + " " + client.getPatronymic());
         emailText.setText(client.getEmail());
     }
 
-    private void setTextForElement(){
-
-
+    private void setTextForElement() {
     }
 
 }
