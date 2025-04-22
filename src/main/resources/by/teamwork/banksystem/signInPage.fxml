@@ -39,12 +39,12 @@
             <Font name="Arial Black" size="20.0" />
          </font>
       </Button>
-      <Text fx:id="emailError" fill="RED" layoutX="133.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="emailError" fill="RED" layoutX="133.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="passwordError" fill="RED" layoutX="130.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="passwordError" fill="RED" layoutX="130.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
