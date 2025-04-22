@@ -1,11 +1,14 @@
 package by.teamwork.banksystem.models;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 import javax.persistence.Column;
@@ -17,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +31,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Builder
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +51,7 @@ public class Client {
     @Column(name = "phone")
     private String phone;
     @Column(name = "birthday")
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     @OneToMany(mappedBy = "client")
     private List<Account> accounts;
 

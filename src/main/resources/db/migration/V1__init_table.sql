@@ -5,7 +5,7 @@ CREATE TABLE Client
     "name"     varchar(50)        NOT NULL,
     patronymic varchar(50),
     phone      varchar(13) UNIQUE NOT NULL,
-    birthday   TIMESTAMP,
+    birthday   DATE,
     email      varchar(50) UNIQUE NOT NULL,
     password   varchar(50)        NOT NULL
 );

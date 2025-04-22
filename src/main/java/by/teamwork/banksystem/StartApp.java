@@ -6,14 +6,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.flywaydb.core.Flyway;
 
+
+
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class StartApp extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApp.class.getResource("/by/teamwork/banksystem/hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 480, 720);
+        stage.setTitle("BetaBank!");
         stage.setScene(scene);
         stage.show();
         Flyway flyway = Flyway.configure()
@@ -22,6 +25,7 @@ public class HelloApplication extends Application {
                 .load();
 
         flyway.migrate();
+
     }
 
     public static void main(String[] args) {
