@@ -168,11 +168,16 @@ public class SignUpPageController {
                 termsOfTheUserAgreement = true;
 
             if(!incorrect && termsOfTheUserAgreement){
-                Thread writeThread = new Thread(this::writeInfo);
+                Client client = getClient();
+                Thread writeThread = new Thread(()->{
+                    writeInfo(client);
+                });
                 Thread loadScene = new Thread(()->{
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/mainPage.fxml"));
                         Parent root = loader.load();
+                        MainPageController mainPageController = loader.getController();
+                        mainPageController.initData(client);
                         Platform.runLater(() -> {
                             Stage stage = (Stage) sendButton.getScene().getWindow();
                             Scene nextScene = new Scene(root);
@@ -193,29 +198,32 @@ public class SignUpPageController {
 
 
     }
-    private void writeInfo(){
+
+    private Client getClient() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String input = birthdayField.getText();
+        LocalDate parsedDate = LocalDate.parse(input, formatter);
+        Client client = Client.builder()
+                .lastname(lastNameField.getText())
+                .name(nameField.getText())
+                .patronymic(patronymicField.getText())
+                .phone(phoneField.getText())
+                .birthday(parsedDate)
+                .email(emailField.getText())
+                .password(passwordField.getText())
+                .build();
+        return client;
+    }
+
+    private void writeInfo(Client client){
         Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                 .addAnnotatedClass(Account.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String input = birthdayField.getText();
-        LocalDate parsedDate = LocalDate.parse(input, formatter);
-
         try {
             session.beginTransaction();
 
-            Client client = Client.builder()
-                    .lastname(lastNameField.getText())
-                    .name(nameField.getText())
-                    .patronymic(patronymicField.getText())
-                    .phone(phoneField.getText())
-                    .birthday(parsedDate)
-                    .email(emailField.getText())
-                    .password(passwordField.getText())
-                    .build();
             session.save(client);
-
 
             session.getTransaction().commit();
         } finally {

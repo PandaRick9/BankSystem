@@ -2,6 +2,8 @@ package by.teamwork.banksystem.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import by.teamwork.banksystem.models.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -62,6 +64,8 @@ public class MainPageController {
     @FXML
     private Button transferToAccountButton;
 
+    private Client client;
+
     @FXML
     void initialize() {
         assert accountNumberText != null : "fx:id=\"accountNumberText\" was not injected: check your FXML file 'mainPage.fxml'.";
@@ -80,6 +84,17 @@ public class MainPageController {
         assert searchClientsButton != null : "fx:id=\"searchClientsButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert topUpAccountButton != null : "fx:id=\"topUpAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert transferToAccountButton != null : "fx:id=\"transferToAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
+
+
+    }
+
+    public void initData(Client client){
+        this.client = client;
+        fullNameText.setText(client.getLastname() + " " + client.getName() + " " + client.getPatronymic());
+        emailText.setText(client.getEmail());
+    }
+
+    private void setTextForElement(){
 
     }
 
