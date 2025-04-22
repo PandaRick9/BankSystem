@@ -11,6 +11,7 @@ import org.flywaydb.core.Flyway;
 import java.io.IOException;
 
 public class StartApp extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApp.class.getResource("/by/teamwork/banksystem/hello-view.fxml"));
