@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="480.0" style="-fx-background-color: #9396a3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.teamwork.banksystem.controllers.SignUpPageController">
    <children>
       <Label layoutX="20.0" layoutY="84.0" prefHeight="40.0" prefWidth="288.0" text="Заполните форму">
@@ -35,42 +36,42 @@
          </image>
       </ImageView>
       <TextField fx:id="nameField" layoutX="20.0" layoutY="184.0" prefHeight="40.0" prefWidth="440.0" promptText="Имя (Иван)" />
-      <TextField fx:id="patronymicField" layoutX="20.0" layoutY="244.0" prefHeight="40.0" prefWidth="440.0" promptText="Отчество (Иванов)" />
+      <TextField fx:id="patronymicField" layoutX="20.0" layoutY="244.0" prefHeight="40.0" prefWidth="440.0" promptText="Отчество (Иванов) (Необязательно)" />
       <TextField fx:id="emailField" layoutX="20.0" layoutY="304.0" prefHeight="40.0" prefWidth="440.0" promptText="Email" />
       <TextField fx:id="birthdayField" layoutX="20.0" layoutY="364.0" prefHeight="40.0" prefWidth="440.0" promptText="Дата рождения (02.03.2001)" />
       <TextField fx:id="phoneField" layoutX="20.0" layoutY="424.0" prefHeight="40.0" prefWidth="440.0" promptText="Номер телефона (+375...)" />
       <PasswordField fx:id="passwordField" layoutX="20.0" layoutY="484.0" prefHeight="40.0" prefWidth="440.0" promptText="Пароль" />
-      <Text fx:id="lastnameError" fill="RED" layoutX="22.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="lastnameError" fill="#b11010" layoutX="22.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="nameError" fill="RED" layoutX="22.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="nameError" fill="RED" layoutX="22.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="patronymicError" fill="RED" layoutX="22.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="patronymicError" fill="RED" layoutX="22.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="emailError" fill="RED" layoutX="22.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="emailError" fill="RED" layoutX="22.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="birthdayError" fill="RED" layoutX="22.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="birthdayError" fill="RED" layoutX="22.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="phoneError" fill="RED" layoutX="22.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="phoneError" fill="RED" layoutX="22.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="passwordError" fill="RED" layoutX="22.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="passwordError" fill="RED" layoutX="22.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #b11010;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
