@@ -1,10 +1,26 @@
 package by.teamwork.banksystem.controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.ResourceBundle;
+
+import by.teamwork.banksystem.models.Account;
+import by.teamwork.banksystem.models.Client;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
 
 public class MainPageController {
 
@@ -80,7 +96,58 @@ public class MainPageController {
         assert searchClientsButton != null : "fx:id=\"searchClientsButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert topUpAccountButton != null : "fx:id=\"topUpAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert transferToAccountButton != null : "fx:id=\"transferToAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
+        issuanceButton.setOnAction(actionEvent -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/issuancePage.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) issuanceButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        openAccountButton.setOnAction(actionEvent -> {
+            Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
+                    .addAnnotatedClass(Account.class);
+            SessionFactory sessionFactory = configuration.buildSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            Integer accountNumberGen;
+            try {
+                session.beginTransaction();
+                while (true){
+                accountNumberGen = getAccountNumber();
+                    Query<Account> query = session.createQuery("Select c FROM Account c WHERE c.accountNumber = :accountNumber", Account.class);
+                    query.setParameter("accountNumber", accountNumberGen);
+                    if(query.uniqueResult() == null){
+                        break;
+                    }
+                }
+                Account account = Account.builder()
+                        .amount(0)
+                        .accountNumber(accountNumberGen)
+                        //.client_id(client.getId())
+                        .build();
+                session.save(account);
 
+
+                session.getTransaction().commit();
+            } finally {
+                sessionFactory.close();
+            }
+        });
+    }
+
+    private Integer getAccountNumber() {
+            Random random = new Random();
+            int ownerAccount = 1; //для физлица 1
+            int goalAccount = random.nextInt(10);
+            int accountCurrency = 4;//валюта счета  4 = $
+            int controlNumber = random.nextInt(10); //контрольная цифра
+            int bankDepartament = random.nextInt(1000);
+            int randomNumber = random.nextInt(1000);
+            String result = ownerAccount + goalAccount + accountCurrency + controlNumber + String.format("%03d\n", bankDepartament) + String.format("%03d\n", randomNumber);
+            return Integer.parseInt(result);
     }
 
 }
