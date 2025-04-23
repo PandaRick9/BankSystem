@@ -101,6 +101,7 @@ public class MainPageController {
         assert searchClientsButton != null : "fx:id=\"searchClientsButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert topUpAccountButton != null : "fx:id=\"topUpAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert transferToAccountButton != null : "fx:id=\"transferToAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
+
         nextPaginationButton.setOnAction(actionEvent -> {
             int indexInList = accountList.indexOf(currentAccount);
             if(indexInList == (accountList.size() - 1)){
@@ -119,6 +120,19 @@ public class MainPageController {
             }else{
                 currentAccount = accountList.get(indexInList - 1);
                 setAccountSettings();
+            }
+        });
+        topUpAccountButton.setOnAction(actionEvent -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/addMoneyPage.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) issuanceButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                AddMoneyPageController addMoneyPageController = loader.getController();
+                addMoneyPageController.initData(currentAccount, client);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
@@ -182,8 +196,26 @@ public class MainPageController {
 
     public void initData(Client client) {
         this.client = client;
+        setPersonalInfo(client);
+        loadFirstAccount(client);
+    }
+
+    private void setPersonalInfo(Client client) {
         fullNameText.setText(client.getLastname() + " " + client.getName() + " " + client.getPatronymic());
         emailText.setText(client.getEmail());
+    }
+
+    public void controllersData(Client client, Account account){
+        this.client = client;
+        currentAccount = account;
+        setPersonalInfo(client);
+        setAccountSettings();
+        loadFirstAccount(client);
+
+    }
+
+
+    private void loadFirstAccount(Client client) {
         Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                 .addAnnotatedClass(Account.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
