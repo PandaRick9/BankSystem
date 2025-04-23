@@ -2,10 +2,6 @@ package by.teamwork.banksystem.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -82,6 +78,7 @@ public class MainPageController {
     private Button transferToAccountButton;
 
     private Client client;
+    private Account currentAccount;
 
     @FXML
     void initialize() {
@@ -161,6 +158,20 @@ public class MainPageController {
         this.client = client;
         fullNameText.setText(client.getLastname() + " " + client.getName() + " " + client.getPatronymic());
         emailText.setText(client.getEmail());
+        Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Account.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            session.beginTransaction();
+            Client client1 = session.load(Client.class, client.getId());
+            currentAccount = client1.getAccounts().getFirst();
+
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+
     }
 
     private void setTextForElement() {
