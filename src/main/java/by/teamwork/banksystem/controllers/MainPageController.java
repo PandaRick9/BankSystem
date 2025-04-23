@@ -143,11 +143,14 @@ public class MainPageController {
                 Parent root = loader.load();
                 Stage stage = (Stage) issuanceButton.getScene().getWindow();
                 Scene nextScene = new Scene(root);
+                IssuancePageController issuancePageController = loader.getController();
+                issuancePageController.initData(currentAccount,client);
                 stage.setScene(nextScene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+
         openAccountButton.setOnAction(actionEvent -> {
             Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                     .addAnnotatedClass(Account.class);

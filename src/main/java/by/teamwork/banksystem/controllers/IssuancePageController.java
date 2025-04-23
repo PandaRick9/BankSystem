@@ -1,5 +1,9 @@
 package by.teamwork.banksystem.controllers;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import by.teamwork.banksystem.models.Account;
 import by.teamwork.banksystem.models.Client;
 import javafx.fxml.FXML;
@@ -14,11 +18,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class AddMoneyPageController {
+public class IssuancePageController {
 
     @FXML
     private ResourceBundle resources;
@@ -30,42 +30,43 @@ public class AddMoneyPageController {
     private Text accountNumberText;
 
     @FXML
-    private TextField amountField;
+    private Text amountText;
 
     @FXML
     private Button backButton;
 
     @FXML
-    private Text errorText;
+    private Text issuanceError;
 
     @FXML
-    private Button replenishButton;
+    private TextField issuanceField;
 
     @FXML
     private Text successText;
 
+    @FXML
+    private Button withdrawButton;
 
     private Account account;
     private Client client;
 
     @FXML
     void initialize() {
-        assert accountNumberText != null : "fx:id=\"accountNumberText\" was not injected: check your FXML file 'addMoneyPage.fxml'.";
-        assert amountField != null : "fx:id=\"amountField\" was not injected: check your FXML file 'addMoneyPage.fxml'.";
-        assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'addMoneyPage.fxml'.";
-        assert errorText != null : "fx:id=\"errorText\" was not injected: check your FXML file 'addMoneyPage.fxml'.";
-        assert replenishButton != null : "fx:id=\"replenishButton\" was not injected: check your FXML file 'addMoneyPage.fxml'.";
-        assert successText != null : "fx:id=\"successText\" was not injected: check your FXML file 'addMoneyPage.fxml'.";
-
-
-        replenishButton.setOnAction(actionEvent -> {
-            successText.setText("Успешно!");
-            errorText.setText("");
-            Integer amount = Integer.valueOf(amountField.getText());
-            if(amount <= 0){
-                errorText.setText("Сумма должна быть положительной");
-            }else if(amount > 5000){
-                errorText.setText("Сумма не может привышать 5000");
+        assert accountNumberText != null : "fx:id=\"accountNumberText\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        assert amountText != null : "fx:id=\"amountText\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        assert issuanceError != null : "fx:id=\"issuanceError\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        assert issuanceField != null : "fx:id=\"issuanceField\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        assert successText != null : "fx:id=\"successText\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        assert withdrawButton != null : "fx:id=\"withdrawButton\" was not injected: check your FXML file 'issuancePage.fxml'.";
+        withdrawButton.setOnAction(actionEvent -> {
+            successText.setText("");
+            issuanceError.setText("");
+            Integer amount = Integer.valueOf(issuanceField.getText());
+            if(amount > account.getAmount()){
+                issuanceError.setText("Недостаточно средств");
+            }else if(amount < 0){
+                issuanceError.setText("Введите положительное число");
             }else {
                 Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                         .addAnnotatedClass(Account.class);
@@ -74,17 +75,16 @@ public class AddMoneyPageController {
                 try {
                     session.beginTransaction();
                     Account account1 = session.load(Account.class, account.getAccountId());
-                    account1.setAmount(account1.getAmount() + amount);
+                    account1.setAmount(account1.getAmount() - amount);
+                    account.setAmount(account.getAmount() - amount);
                     session.getTransaction().commit();
                 } finally {
                     sessionFactory.close();
                 }
-
+                amountText.setText(account.getAmount() + "$");
                 successText.setText("Успешно!");
             }
-
         });
-
         backButton.setOnAction(actionEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/mainPage.fxml"));
@@ -104,6 +104,6 @@ public class AddMoneyPageController {
         this.account = account;
         this.client = client;
         accountNumberText.setText(String.valueOf(account.getAccountNumber()));
+        amountText.setText(account.getAmount() + "$");
     }
-
 }
