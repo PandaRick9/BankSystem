@@ -2,6 +2,8 @@ package by.teamwork.banksystem.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -79,6 +81,7 @@ public class MainPageController {
 
     private Client client;
     private Account currentAccount;
+    private List<Account> accountList = new ArrayList<>();
 
     @FXML
     void initialize() {
@@ -98,6 +101,28 @@ public class MainPageController {
         assert searchClientsButton != null : "fx:id=\"searchClientsButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert topUpAccountButton != null : "fx:id=\"topUpAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert transferToAccountButton != null : "fx:id=\"transferToAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
+        nextPaginationButton.setOnAction(actionEvent -> {
+            int indexInList = accountList.indexOf(currentAccount);
+            if(indexInList == (accountList.size() - 1)){
+                currentAccount = accountList.getFirst();
+                setAccountSettings();
+            }else{
+                currentAccount = accountList.get(indexInList + 1);
+                setAccountSettings();
+            }
+        });
+        backPaginationButton.setOnAction(actionEvent -> {
+            int indexInList = accountList.indexOf(currentAccount);
+            if(indexInList == 0){
+                currentAccount = accountList.getLast();
+                setAccountSettings();
+            }else{
+                currentAccount = accountList.get(indexInList - 1);
+                setAccountSettings();
+            }
+        });
+
+
         issuanceButton.setOnAction(actionEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/issuancePage.fxml"));
@@ -130,6 +155,7 @@ public class MainPageController {
                         .accountNumber(accountNumberGen)
                         .client(client)
                         .build();
+                accountList.add(account);
                 session.save(account);
                 session.getTransaction().commit();
             } finally {
@@ -166,15 +192,17 @@ public class MainPageController {
             session.beginTransaction();
             Client client1 = session.load(Client.class, client.getId());
             currentAccount = client1.getAccounts().getFirst();
-
+            accountList.addAll(client1.getAccounts());
             session.getTransaction().commit();
         } finally {
             sessionFactory.close();
         }
-
+        setAccountSettings();
     }
 
-    private void setTextForElement() {
+    private void setAccountSettings() {
+        accountNumberText.setText(String.valueOf(currentAccount.getAccountNumber()));
+        amountText.setText(currentAccount.getAmount() + "$");
     }
 
 }
