@@ -112,7 +112,9 @@ public class MainPageController {
         backPaginationButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             int indexInList = accountList.indexOf(currentAccount);
-            if(indexInList == 0){
+            System.out.println(indexInList);
+            System.out.println(accountList.toString());
+            if(indexInList == 0 || indexInList == -1){
                 currentAccount = accountList.getLast();
                 setAccountSettings();
             }else{
