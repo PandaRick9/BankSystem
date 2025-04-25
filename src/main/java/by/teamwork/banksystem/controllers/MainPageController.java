@@ -202,17 +202,6 @@ public class MainPageController {
             }
 
         });
-
-
-        manageProfileButton.setOnAction(actionEvent -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/manageProfilePage.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) manageProfileButton.getScene().getWindow();
-                Scene nextScene = new Scene(root);
-                ManageProfileController manageProfileController = loader.getController();
-                manageProfileController.initData(client);
-
         exitButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             try {
@@ -220,19 +209,16 @@ public class MainPageController {
                 Parent root = loader.load();
                 Stage stage = (Stage) exitButton.getScene().getWindow();
                 Scene nextScene = new Scene(root);
-
                 stage.setScene(nextScene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
 
-
     }
 
     private void setCloseErrorEmpty() {
         closeAccountError.setText("");
-
     }
 
 
