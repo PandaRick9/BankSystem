@@ -101,7 +101,6 @@ public class MainPageController {
         assert searchClientsButton != null : "fx:id=\"searchClientsButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert topUpAccountButton != null : "fx:id=\"topUpAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert transferToAccountButton != null : "fx:id=\"transferToAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
-
         nextPaginationButton.setOnAction(actionEvent -> {
             int indexInList = accountList.indexOf(currentAccount);
             if(indexInList == (accountList.size() - 1)){
@@ -222,11 +221,10 @@ public class MainPageController {
 
     public void controllersData(Client client, Account account){
         this.client = client;
-        currentAccount = account;
         setPersonalInfo(client);
-        setAccountSettings();
         loadFirstAccount(client);
-
+        this.currentAccount = account;
+        setAccountSettings();
     }
 
 
