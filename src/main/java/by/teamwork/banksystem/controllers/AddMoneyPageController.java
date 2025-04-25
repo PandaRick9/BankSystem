@@ -75,6 +75,7 @@ public class AddMoneyPageController {
                     session.beginTransaction();
                     Account account1 = session.load(Account.class, account.getAccountId());
                     account1.setAmount(account1.getAmount() + amount);
+                    account = account1;
                     session.getTransaction().commit();
                 } finally {
                     sessionFactory.close();
