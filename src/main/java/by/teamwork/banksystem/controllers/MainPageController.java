@@ -137,6 +137,21 @@ public class MainPageController {
             }
 
         });
+
+        manageProfileButton.setOnAction(actionEvent -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/manageProfilePage.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) manageProfileButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                ManageProfileController manageProfileController = loader.getController();
+                manageProfileController.initData(client);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
 
