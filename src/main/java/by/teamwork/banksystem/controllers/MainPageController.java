@@ -174,6 +174,7 @@ public class MainPageController {
             }
 
         });
+
         transferToAccountButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             try {
@@ -188,6 +189,7 @@ public class MainPageController {
                 e.printStackTrace();
             }
         });
+
         openAccountButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
