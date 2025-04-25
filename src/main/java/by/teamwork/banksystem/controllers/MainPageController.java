@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.hibernate.Session;
@@ -59,9 +60,6 @@ public class MainPageController {
     private Button issuanceButton;
 
     @FXML
-    private Text issuanceError;
-
-    @FXML
     private Button manageProfileButton;
 
     @FXML
@@ -94,7 +92,6 @@ public class MainPageController {
         assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert fullNameText != null : "fx:id=\"fullNameText\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert issuanceButton != null : "fx:id=\"issuanceButton\" was not injected: check your FXML file 'mainPage.fxml'.";
-        assert issuanceError != null : "fx:id=\"issuanceError\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert manageProfileButton != null : "fx:id=\"manageProfileButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert nextPaginationButton != null : "fx:id=\"nextPaginationButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert openAccountButton != null : "fx:id=\"openAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
@@ -102,6 +99,7 @@ public class MainPageController {
         assert topUpAccountButton != null : "fx:id=\"topUpAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         assert transferToAccountButton != null : "fx:id=\"transferToAccountButton\" was not injected: check your FXML file 'mainPage.fxml'.";
         nextPaginationButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
             int indexInList = accountList.indexOf(currentAccount);
             if(indexInList == (accountList.size() - 1)){
                 currentAccount = accountList.getFirst();
@@ -112,6 +110,7 @@ public class MainPageController {
             }
         });
         backPaginationButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
             int indexInList = accountList.indexOf(currentAccount);
             if(indexInList == 0){
                 currentAccount = accountList.getLast();
@@ -122,6 +121,7 @@ public class MainPageController {
             }
         });
         topUpAccountButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/addMoneyPage.fxml"));
                 Parent root = loader.load();
@@ -137,6 +137,7 @@ public class MainPageController {
 
 
         issuanceButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/issuancePage.fxml"));
                 Parent root = loader.load();
@@ -149,8 +150,44 @@ public class MainPageController {
                 e.printStackTrace();
             }
         });
+        closeAccountButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
+            if(currentAccount.getAmount() == 0){
+                Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
+                        .addAnnotatedClass(Account.class);
+                SessionFactory sessionFactory = configuration.buildSessionFactory();
+                Session session = sessionFactory.getCurrentSession();
+                try {
+                    session.beginTransaction();
+                    Account account = session.load(Account.class, currentAccount.getAccountId());
+                    session.remove(account);
+                    session.getTransaction().commit();
+                } finally {
+                    sessionFactory.close();
+                }
+                loadFirstAccount(client);
+            }else {
+                closeAccountError.setText("Положительный баланс!");
 
+            }
+
+        });
+        transferToAccountButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/transferPage.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) issuanceButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                TransferPageController transferPageController = loader.getController();
+                transferPageController.initData(currentAccount,client);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         openAccountButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
             Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                     .addAnnotatedClass(Account.class);
             SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -180,6 +217,7 @@ public class MainPageController {
 
         });
         exitButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/hello-view.fxml"));
                 Parent root = loader.load();
@@ -191,6 +229,10 @@ public class MainPageController {
             }
         });
 
+    }
+
+    private void setCloseErrorEmpty() {
+        closeAccountError.setText("");
     }
 
 
