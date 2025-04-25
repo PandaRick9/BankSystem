@@ -153,7 +153,7 @@ public class ChangeProfileDataController {
 
         backButton.setOnAction(actionEvent -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/mainPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/manageProfilePage.fxml"));
                 Parent root = loader.load();
                 MainPageController mainPageController = loader.getController();
                 mainPageController.initData(client);
