@@ -106,7 +106,9 @@ public class ManageProfileController {
     public void initData(Client client) {
         this.client = client;
     }
+    public void helloWorld(){
 
+    }
 
 
 }
