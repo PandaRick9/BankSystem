@@ -180,6 +180,18 @@ public class MainPageController {
             }
 
         });
+        exitButton.setOnAction(actionEvent -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/hello-view.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) exitButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
 
