@@ -59,7 +59,7 @@ public class AddMoneyPageController {
 
 
         replenishButton.setOnAction(actionEvent -> {
-            successText.setText("Успешно!");
+            successText.setText("");
             errorText.setText("");
             Integer amount = Integer.valueOf(amountField.getText());
             if(amount <= 0){

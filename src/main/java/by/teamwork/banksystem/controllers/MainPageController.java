@@ -112,7 +112,9 @@ public class MainPageController {
         backPaginationButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             int indexInList = accountList.indexOf(currentAccount);
-            if(indexInList == 0){
+            System.out.println(indexInList);
+            System.out.println(accountList.toString());
+            if(indexInList == 0 || indexInList == -1){
                 currentAccount = accountList.getLast();
                 setAccountSettings();
             }else{
@@ -172,6 +174,22 @@ public class MainPageController {
             }
 
         });
+
+        transferToAccountButton.setOnAction(actionEvent -> {
+            setCloseErrorEmpty();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/transferPage.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) issuanceButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                TransferPageController transferPageController = loader.getController();
+                transferPageController.initData(currentAccount,client);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         openAccountButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
