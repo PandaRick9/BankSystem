@@ -65,7 +65,7 @@ public class AddMoneyPageController {
             if(amount <= 0){
                 errorText.setText("Сумма должна быть положительной");
             }else if(amount > 5000){
-                errorText.setText("Сумма не может привышать 5000");
+                errorText.setText("Сумма не может превышать 5000");
             }else {
                 Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                         .addAnnotatedClass(Account.class);

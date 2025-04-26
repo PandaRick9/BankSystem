@@ -316,6 +316,7 @@ public class MainPageController {
                 client1 =  query.uniqueResult();
             }else {
                 client1 = session.get(Client.class, client.getId());
+                System.out.println(client1 + "  ю   " + client);
             }
             List<Account> accounts = client1.getAccounts();
 
