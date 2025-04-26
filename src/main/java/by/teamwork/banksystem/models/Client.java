@@ -55,4 +55,17 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Account> accounts;
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }
