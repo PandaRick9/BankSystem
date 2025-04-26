@@ -101,10 +101,10 @@ public class MainPageController {
         nextPaginationButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             int indexInList = accountList.indexOf(currentAccount);
-            if(indexInList == (accountList.size() - 1)){
+            if (indexInList == (accountList.size() - 1)) {
                 currentAccount = accountList.getFirst();
                 setAccountSettings();
-            }else{
+            } else {
                 currentAccount = accountList.get(indexInList + 1);
                 setAccountSettings();
             }
@@ -112,12 +112,10 @@ public class MainPageController {
         backPaginationButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
             int indexInList = accountList.indexOf(currentAccount);
-            System.out.println(indexInList);
-            System.out.println(accountList.toString());
-            if(indexInList == 0 || indexInList == -1){
+            if (indexInList == 0 || indexInList == -1) {
                 currentAccount = accountList.getLast();
                 setAccountSettings();
-            }else{
+            } else {
                 currentAccount = accountList.get(indexInList - 1);
                 setAccountSettings();
             }
@@ -146,7 +144,7 @@ public class MainPageController {
                 Stage stage = (Stage) issuanceButton.getScene().getWindow();
                 Scene nextScene = new Scene(root);
                 IssuancePageController issuancePageController = loader.getController();
-                issuancePageController.initData(currentAccount,client);
+                issuancePageController.initData(currentAccount, client);
                 stage.setScene(nextScene);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -154,13 +152,14 @@ public class MainPageController {
         });
         closeAccountButton.setOnAction(actionEvent -> {
             setCloseErrorEmpty();
-            if(currentAccount.getAmount() == 0){
+            if (currentAccount.getAmount() == 0) {
                 Configuration configuration = new Configuration().addAnnotatedClass(Client.class)
                         .addAnnotatedClass(Account.class);
                 SessionFactory sessionFactory = configuration.buildSessionFactory();
                 Session session = sessionFactory.getCurrentSession();
                 try {
                     session.beginTransaction();
+                    accountList.remove(currentAccount);
                     Account account = session.load(Account.class, currentAccount.getAccountId());
                     session.remove(account);
                     session.getTransaction().commit();
@@ -168,7 +167,7 @@ public class MainPageController {
                     sessionFactory.close();
                 }
                 loadFirstAccount(client);
-            }else {
+            } else {
                 closeAccountError.setText("Положительный баланс!");
 
             }
@@ -183,7 +182,7 @@ public class MainPageController {
                 Stage stage = (Stage) issuanceButton.getScene().getWindow();
                 Scene nextScene = new Scene(root);
                 TransferPageController transferPageController = loader.getController();
-                transferPageController.initData(currentAccount,client);
+                transferPageController.initData(currentAccount, client);
                 stage.setScene(nextScene);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -213,11 +212,13 @@ public class MainPageController {
                         .client(client)
                         .build();
                 accountList.add(account);
+                currentAccount = account;
                 session.save(account);
                 session.getTransaction().commit();
             } finally {
                 sessionFactory.close();
             }
+            setAccountSettings();
 
         });
         exitButton.setOnAction(actionEvent -> {
@@ -278,7 +279,7 @@ public class MainPageController {
         emailText.setText(client.getEmail());
     }
 
-    public void controllersData(Client client, Account account){
+    public void controllersData(Client client, Account account) {
         this.client = client;
         setPersonalInfo(client);
         loadFirstAccount(client);
@@ -294,14 +295,29 @@ public class MainPageController {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.beginTransaction();
-            Client client1 = session.load(Client.class, client.getId());
-            currentAccount = client1.getAccounts().getFirst();
-            accountList.addAll(client1.getAccounts());
+            Client client1;
+            if(client.getId() == null) {
+                Query<Client> query = session.createQuery("Select c FROM Client c WHERE c.email = :email", Client.class);
+                query.setParameter("email", client.getEmail());
+                client1 =  query.uniqueResult();
+            }else {
+                client1 = session.get(Client.class, client.getId());
+            }
+            List<Account> accounts = client1.getAccounts();
+
+            if (accounts == null || accounts.isEmpty()) {
+                accountNumberText.setText("Пока нету счетов");
+                amountText.setText("0$");
+            } else {
+                currentAccount = accounts.getFirst();
+                accountList.addAll(accounts);
+                setAccountSettings();
+            }
             session.getTransaction().commit();
         } finally {
             sessionFactory.close();
         }
-        setAccountSettings();
+
     }
 
     private void setAccountSettings() {
