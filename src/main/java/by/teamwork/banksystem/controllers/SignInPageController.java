@@ -107,7 +107,6 @@ public class SignInPageController {
         try {
             session.beginTransaction();
 
-
             Query<Client> query = session.createQuery("Select c FROM Client c WHERE c.email = :email", Client.class);
             query.setParameter("email", emailField.getText());
             client =  query.uniqueResult();

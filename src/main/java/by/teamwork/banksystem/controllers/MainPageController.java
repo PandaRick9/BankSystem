@@ -246,6 +246,20 @@ public class MainPageController {
             }
         });
 
+        searchClientsButton.setOnAction(actionEvent -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/searchPage.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) searchClientsButton.getScene().getWindow();
+                Scene nextScene = new Scene(root);
+                SearchController searchController = loader.getController();
+                searchController.initData(client);
+                stage.setScene(nextScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     private void setCloseErrorEmpty() {
