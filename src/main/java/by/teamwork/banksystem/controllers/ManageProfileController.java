@@ -67,8 +67,8 @@ public class ManageProfileController {
             try {
                 session.beginTransaction();
                 Client client1 = session.load(Client.class, client.getId());
-                if(client1.getAccounts() == null){
-                    session.delete(client1);
+                if(client1.getAccounts() == null || client1.getAccounts().isEmpty()) {
+                    session.remove(client1);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/hello-view.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) deleteButton.getScene().getWindow();
