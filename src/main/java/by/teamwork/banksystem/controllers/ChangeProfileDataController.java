@@ -155,8 +155,8 @@ public class ChangeProfileDataController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/by/teamwork/banksystem/manageProfilePage.fxml"));
                 Parent root = loader.load();
-                MainPageController mainPageController = loader.getController();
-                mainPageController.initData(client);
+                ManageProfileController manageProfileController = loader.getController();
+                manageProfileController.initData(client);
                 Platform.runLater(() -> {
                     Stage stage = (Stage) changeButton.getScene().getWindow();
                     Scene nextScene = new Scene(root);
